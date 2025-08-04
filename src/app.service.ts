@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-interface Istudent {
+export interface Istudent {
   name: string;
   age: number;
 }
@@ -13,6 +13,34 @@ export class AppService {
     { name: 'John', age: 18 },
   ];
   getStudents(): object {
+    return this.students;
+  }
+  getStudentsByAge(age: number): Istudent | undefined {
+    const student: Istudent | undefined = this.students.find(
+      (student) => student.age == age,
+    );
+    return student;
+  }
+
+  addStudent(student: Istudent) {
+    this.students.push(student);
+    return this.students;
+  }
+
+  updateStudent(age: number, studentNew: Istudent) {
+    const studentIndex = this.students.findIndex(
+      (student) => student.age === age,
+    );
+    this.students[studentIndex] = studentNew;
+    return this.students;
+  }
+  deleteStudent(age: number) {
+    const studentIndex = this.students.findIndex(
+      (student) => student.age === age,
+    );
+    console.log('object');
+
+    this.students.splice(studentIndex, 1);
     return this.students;
   }
 }
