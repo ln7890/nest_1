@@ -38,8 +38,6 @@ export class AppService {
     const studentIndex = this.students.findIndex(
       (student) => student.age === age,
     );
-    console.log('object');
-
     this.students.splice(studentIndex, 1);
     return this.students;
   }
